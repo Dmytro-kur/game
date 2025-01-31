@@ -60,4 +60,4 @@ def lootbox_simulation(
 
 # Запуск симуляції
 if __name__ == "__main__":
-    lootbox_simulation(initial_collected=0, auto_strategy=False, switch_threshold=16)
+    lootbox_simulation(initial_collected=0, auto_strategy=True, switch_threshold=5)

@@ -45,12 +45,25 @@ num_trials = 100000
 strategy_1_costs = simulate_auto_strategy(switch_threshold=7, num_trials=num_trials)
 strategy_2_costs = simulate_auto_strategy(switch_threshold=1, num_trials=num_trials)
 strategy_3_costs = simulate_auto_strategy(switch_threshold=10, num_trials=num_trials)
+median_strategy_1 = np.median(strategy_1_costs)
+median_strategy_2 = np.median(strategy_2_costs)
+median_strategy_3 = np.median(strategy_3_costs)
+
 
 # Побудова графіків для обох стратегій
 plt.figure(figsize=(10, 6))
-plt.hist(strategy_1_costs, bins=50, alpha=0.6, color='blue', label='Перехід на 7 речах')
-plt.hist(strategy_2_costs, bins=50, alpha=0.6, color='red', label='Перехід на 1 речах')
-plt.hist(strategy_3_costs, bins=50, alpha=0.6, color='green', label='Перехід на 10 речах')
+plt.hist(strategy_1_costs, bins=50, alpha=0.6, color='blue',
+         label=f'Перехід на 7 речах (медіана: {median_strategy_1:.0f})')
+plt.hist(strategy_2_costs, bins=50, alpha=0.6, color='red',
+         label=f'Перехід на 1 речах (медіана: {median_strategy_2:.0f})')
+plt.hist(strategy_3_costs, bins=50, alpha=0.6, color='green',
+         label=f'Перехід на 10 речах (медіана: {median_strategy_3:.0f})')
+
+# Додавання вертикальних ліній медіан
+plt.axvline(median_strategy_1, color='blue', linestyle='dashed', linewidth=2, label='Медіана (7 речей)')
+plt.axvline(median_strategy_2, color='red', linestyle='dashed', linewidth=2, label='Медіана (1 річ)')
+plt.axvline(median_strategy_3, color='green', linestyle='dashed', linewidth=2, label='Медіана (10 речей)')
+
 plt.xlabel("Загальні витрати (од.)")
 plt.ylabel("Частота")
 plt.title("Порівняння вартості стратегій для різних порогів переходу")
